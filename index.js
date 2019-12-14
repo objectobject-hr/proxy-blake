@@ -2,7 +2,7 @@ const express = require('express')
 // const proxy = require('http-proxy-middleware')
 const path = require('path')
 const controllerD = require('../David-service/server/controllers')
-const controllerB = require('../service-blake/db/')
+const controllerB = require('../service-blake/db/controller')
 const controllerA = require('../service-aaron/server/controllers')
 
 const app = express()
