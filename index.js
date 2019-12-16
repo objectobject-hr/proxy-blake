@@ -38,8 +38,8 @@ for (server of servers) {
   )
 }
 
-app.get('/ikea', (req, res) => controllerD.getAll(req, res))
-app.get('/ikeaproducts', (req, res) => controllerA.getAll(req, res))
-app.get('/reviews', (req, res) => controllerB.get(req, res))
+// app.get('/ikea', (req, res) => controllerD.getAll(req, res))
+// app.get('/ikeaproducts', (req, res) => controllerA.getAll(req, res))
+// app.get('/reviews', (req, res) => controllerB.get(req, res))
 
 app.listen(port, () => console.log(`listening on port ${port}`))
