@@ -9,7 +9,7 @@ const path = require('path')
 const app = express()
 const port = 3000
 
-mongoose.connect('mongodb://localhost/fec', {
+mongoose.connect('mongodb://mongo:27017/fec', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
