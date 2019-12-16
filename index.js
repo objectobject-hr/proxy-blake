@@ -19,7 +19,8 @@ app.use(express.static(path.join(__dirname, 'dist')))
 const servers = [
   { route: '/reviews', location: 'http://localhost:3003/reviews' },
   { route: '/ikea', location: 'http://localhost:3007/ikea' },
-  { route: '/products', location: 'http://localhost:3001/products' }
+  { route: '/products', location: 'http://localhost:3001/products' },
+  { route: '/searchbar', location: 'http://localhost:3002/searchbar' }
 ]
 
 for (server of servers) {
