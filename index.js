@@ -1,35 +1,41 @@
 const express = require('express')
-// const proxy = require('http-proxy-middleware')
+const mongoose = require('mongoose')
+const proxy = require('http-proxy-middleware')
 const path = require('path')
-const controllerD = require('../David-service/server/controllers')
-const controllerB = require('../service-blake/db/controller')
-const controllerA = require('../service-aaron/server/controllers')
+// const controllerD = require('../David-service/server/controllers')
+// const controllerB = require('../service-blake/db/controller')
+// const controllerA = require('../service-aaron/server/controllers')
 
 const app = express()
 const port = 3000
 
+mongoose.connect('mongodb://localhost/fec', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+
 app.use(express.static(path.join(__dirname, 'dist')))
 
-// const servers = [
-//   { route: '/reviews', location: 'http://localhost:3003/reviews' },
-//   { route: '/ikea', location: 'http://localhost:3007/ikea' },
-//   { route: '/products', location: 'http://localhost:3001/products' }
-// ]
+const servers = [
+  { route: '/reviews', location: 'http://localhost:3003/reviews' },
+  { route: '/ikea', location: 'http://localhost:3007/ikea' },
+  { route: '/products', location: 'http://localhost:3001/products' }
+]
 
-// for (server of servers) {
-//   app.use(
-//     server.route,
-//     proxy({
-//       target: server.location,
-//       pathRewrite: (path, req) => {
-//         return path
-//           .split('/')
-//           .slice(2)
-//           .join('/')
-//       }
-//     })
-//   )
-// }
+for (server of servers) {
+  app.use(
+    server.route,
+    proxy({
+      target: server.location,
+      pathRewrite: (path, req) => {
+        return path
+          .split('/')
+          .slice(2)
+          .join('/')
+      }
+    })
+  )
+}
 
 app.get('/ikea', (req, res) => controllerD.getAll(req, res))
 app.get('/ikeaproducts', (req, res) => controllerA.getAll(req, res))
