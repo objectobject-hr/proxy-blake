@@ -39,12 +39,9 @@ for (server of servers) {
 
 app.listen(port, () => {
   console.log(`listening on port ${port}`)
-  mongoose.connect(
-    'mongodb://mongo:27017/fec',
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    },
-    () => console.log('connected to mongodb')
-  )
+  mongoose.connect('mongodb://mongo:27017/fec', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  mongoose.connection.on('connected', () => console.log('connected to mongdb'))
 })
